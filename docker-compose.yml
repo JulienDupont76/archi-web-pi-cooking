@@ -1,9 +1,14 @@
 services:
-  cours-2026:
-    image: node:18
-    build: .
+  archi-web:
+    container_name: pi-cooking
+    image: ghcr.io/juliendupont76/pi-cooking:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - '3000:8000'
-    volumes:
-      - .:/app
-    command: npm run dev
+      - '3000:3000'
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: 0.0.0.0
+    restart: unless-stopped
