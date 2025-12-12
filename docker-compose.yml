@@ -1,0 +1,9 @@
+services:
+  cours-2026:
+    image: node:18
+    build: .
+    ports:
+      - '3000:8000'
+    volumes:
+      - .:/app
+    command: npm run dev
