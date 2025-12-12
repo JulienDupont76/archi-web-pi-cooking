@@ -30,9 +30,11 @@ const eslintConfig = defineConfig([
   globalIgnores([
     // Default ignores of eslint-config-next:
     '.next/**',
+    '.github/**',
     'out/**',
     'build/**',
     'next-env.d.ts',
+    'eslint.config.mjs',
     'commitlint.config.mjs',
   ]),
 ]);
