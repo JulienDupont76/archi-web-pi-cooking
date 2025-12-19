@@ -5,13 +5,14 @@ const API_BASE_URL = 'https://gourmet.cours.quimerch.com';
 export interface Recipe {
   id: string;
   title: string;
+  name: string;
   description?: string;
-  imageUrl?: string;
-  image?: string; // Au cas où l'API utilise "image" au lieu de "imageUrl"
+  image_url?: string;
+  image?: string; // Au cas où l'API utilise "image" au lieu de "image_url"
   ingredients?: string[];
   instructions?: string[];
-  prepTime?: number;
-  cookTime?: number;
+  prep_time?: number;
+  cook_time?: number;
   servings?: number;
   difficulty?: string;
   category?: string;
