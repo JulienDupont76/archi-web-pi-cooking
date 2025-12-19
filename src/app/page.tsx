@@ -1,13 +1,15 @@
-import RecipeList from '@/components/RecipeList';
-import { getRecipes } from '@/lib/api';
+import type { Metadata } from 'next';
 
-export const metadata = {
+import RecipeList from '@/components/RecipeList';
+import { getRecipes, Recipe } from '@/lib/api';
+
+export const metadata: Metadata = {
   title: 'Recettes - Accueil',
   description: 'Découvrez toutes nos délicieuses recettes',
 };
 
 export default async function Home() {
-  let recipes = [];
+  let recipes: Recipe[] = [];
   let hasError = false;
 
   try {

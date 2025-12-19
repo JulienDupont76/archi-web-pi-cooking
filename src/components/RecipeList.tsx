@@ -1,16 +1,17 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
-interface Recipe {
-  id: string;
-  name: string;
-  description?: string;
-  image_url?: string;
-  prep_time?: number;
-  cook_time?: number;
-  category?: string;
-  servings?: number;
-}
+import { Recipe } from '@/lib/api';
+
+// interface Recipe {
+//   id: string;
+//   name: string;
+//   description?: string;
+//   image_url?: string;
+//   prep_time?: number;
+//   cook_time?: number;
+//   category?: string;
+//   servings?: number;
+// }
 
 interface RecipeListProps {
   recipes: Recipe[];
