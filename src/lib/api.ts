@@ -1,4 +1,5 @@
 import { Recipe } from './types';
+export type { Recipe } from './types';
 
 const API_BASE_URL = 'https://gourmet.cours.quimerch.com';
 
