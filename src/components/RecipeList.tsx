@@ -1,17 +1,16 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
-import { Recipe } from '@/lib/api';
-
-// interface Recipe {
-//   id: string;
-//   name: string;
-//   description?: string;
-//   image_url?: string;
-//   prep_time?: number;
-//   cook_time?: number;
-//   category?: string;
-//   servings?: number;
-// }
+interface Recipe {
+  id: string;
+  name: string;
+  description?: string;
+  image_url?: string;
+  prep_time?: number;
+  cook_time?: number;
+  category?: string;
+  servings?: number;
+}
 
 interface RecipeListProps {
   recipes: Recipe[];
@@ -32,14 +31,14 @@ export default function RecipeList({ recipes }: RecipeListProps) {
         <Link key={recipe.id} href={`/recettes/${recipe.id}`} className="group">
           <article className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
             {/* Image de la recette */}
-            <div className="relative h-48 bg-gray-200">
+            <div className="relative h-48 bg-gray-200 overflow-hidden">
               {recipe.image_url ? (
                 <Image
                   src={recipe.image_url}
                   alt={recipe.name}
-                  width={400}
-                  height={192}
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                 />
               ) : (
                 <div className="flex items-center justify-center h-full">
