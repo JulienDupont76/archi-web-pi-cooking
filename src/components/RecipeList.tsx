@@ -34,7 +34,13 @@ export default function RecipeList({ recipes }: RecipeListProps) {
             {/* Image de la recette */}
             <div className="relative h-48 bg-gray-200">
               {recipe.image_url ? (
-                <img src={recipe.image_url} alt={recipe.name} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+                <Image
+                  src={recipe.image_url}
+                  alt={recipe.name}
+                  width={400}
+                  height={192}
+                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                />
               ) : (
                 <div className="flex items-center justify-center h-full">
                   <svg className="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,7 +57,7 @@ export default function RecipeList({ recipes }: RecipeListProps) {
 
             {/* Contenu de la carte */}
             <div className="p-4">
-              <h3 className="font-semibold text-lg mb-2 text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">{recipe.name}</h3>
+              <h3 className="font-semibold text-lg mb-2 text-gray-900 group-hover:text-orange-600 transition-colors line-clamp-2">{recipe.name}</h3>
 
               {recipe.description && <p className="text-gray-600 text-sm mb-3 line-clamp-2">{recipe.description}</p>}
 
@@ -83,7 +89,9 @@ export default function RecipeList({ recipes }: RecipeListProps) {
 
               {/* Badge catégorie et portions */}
               <div className="mt-3 flex gap-2">
-                {recipe.category && <span className="inline-flex items-center text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full">{recipe.category}</span>}
+                {recipe.category && (
+                  <span className="inline-flex items-center text-xs bg-orange-50 text-orange-700 px-2 py-1 rounded-full">{recipe.category}</span>
+                )}
                 {recipe.servings && (
                   <span className="inline-flex items-center gap-1 text-xs bg-green-50 text-green-700 px-2 py-1 rounded-full">
                     <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

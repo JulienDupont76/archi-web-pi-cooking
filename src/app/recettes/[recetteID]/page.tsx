@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import FavoriteButton from '@/components/FavoriteButton';
 import { getRecipe } from '@/lib/api';
 import { Recipe } from '@/lib/types';
 
@@ -41,12 +42,12 @@ export async function generateMetadata({ params }: PageProps) {
     const fetchedRecipe = (await getRecipe(recetteID)) as FetchedRecipe;
     const recipeName = fetchedRecipe.name || fetchedRecipe.title || 'Recette';
     return {
-      title: `${recipeName} - Pi Cooking`,
+      title: `${recipeName} - Pi Food`,
       description: fetchedRecipe.description || 'Découvrez cette délicieuse recette',
     };
   } catch {
     return {
-      title: 'Recette introuvable - Pi Cooking',
+      title: 'Recette introuvable - Pi Food',
     };
   }
 }
@@ -83,8 +84,7 @@ export default async function RecipePage({ params }: PageProps) {
       when_to_eat: fetchedRecipe.when_to_eat,
       disclaimer: fetchedRecipe.disclaimer,
     };
-  } catch (error) {
-    console.error('Erreur fetching recipe:', error);
+  } catch {
     hasError = true;
   }
 
@@ -95,7 +95,7 @@ export default async function RecipePage({ params }: PageProps) {
   return (
     <main className="container mx-auto px-4 py-8 max-w-4xl">
       {/* Bouton retour */}
-      <Link href="/" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 mb-6 transition-colors">
+      <Link href="/" className="inline-flex items-center gap-2 text-orange-600 hover:text-orange-800 mb-6 transition-colors">
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
         </svg>
@@ -125,7 +125,10 @@ export default async function RecipePage({ params }: PageProps) {
         <div className="p-6 md:p-8">
           {/* En-tête */}
           <div className="mb-6">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">{recipe.name}</h1>
+            <div className="flex items-start justify-between gap-4 mb-3">
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 flex-1">{recipe.name}</h1>
+              <FavoriteButton recipeId={recipe.id} />
+            </div>
 
             {recipe.description && <p className="text-gray-600 text-lg mb-4">{recipe.description}</p>}
 
@@ -133,7 +136,7 @@ export default async function RecipePage({ params }: PageProps) {
             <div className="flex flex-wrap gap-4 mb-4">
               {recipe.prep_time && Number(recipe.prep_time) > 0 && (
                 <div className="flex items-center gap-2 text-gray-700">
-                  <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <span className="font-medium">Préparation: {recipe.prep_time} min</span>
@@ -181,7 +184,7 @@ export default async function RecipePage({ params }: PageProps) {
             {/* Badges */}
             <div className="flex flex-wrap gap-2">
               {recipe.category && (
-                <span className="inline-flex items-center bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">{recipe.category}</span>
+                <span className="inline-flex items-center bg-orange-50 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">{recipe.category}</span>
               )}
               {recipe.difficulty && (
                 <span className="inline-flex items-center bg-purple-50 text-purple-700 px-3 py-1 rounded-full text-sm font-medium">
@@ -210,7 +213,7 @@ export default async function RecipePage({ params }: PageProps) {
           {recipe.ingredients && (
             <div className="mb-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

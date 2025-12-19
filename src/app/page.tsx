@@ -14,8 +14,7 @@ export default async function Home() {
 
   try {
     recipes = await getRecipes();
-  } catch (error) {
-    console.error('Erreur fetching recipes:', error);
+  } catch {
     hasError = true;
   }
 
@@ -33,7 +32,7 @@ export default async function Home() {
   return (
     <main className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2">Toutes les Recettes</h1>
+        <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-orange-600 to-green-600 bg-clip-text text-transparent">Toutes les Recettes</h1>
         <p className="text-gray-600">
           Découvrez {recipes.length} recette{recipes.length > 1 ? 's' : ''} délicieuse{recipes.length > 1 ? 's' : ''}
         </p>
