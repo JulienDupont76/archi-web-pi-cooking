@@ -240,7 +240,7 @@ export async function getFavorites(token: string, username: string): Promise<Rec
 }
 
 export async function addToFavorites(recipeId: string, token: string, username: string) {
-  const headerVariations = [
+  const headerVariations: Array<HeadersInit> = [
     {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
