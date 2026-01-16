@@ -1,4 +1,4 @@
-export default {
+const config = {
   extends: ['@commitlint/config-conventional'],
   rules: {
     'type-enum': [2, 'always', ['feat', 'fix', 'docs', 'style', 'refactor', 'chore']],
@@ -6,3 +6,5 @@ export default {
     'subject-empty': [2, 'never'],
   },
 };
+
+export default config;
