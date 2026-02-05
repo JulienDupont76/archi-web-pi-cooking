@@ -23,13 +23,13 @@
   }
 
   body {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/cuisine-bg.jpeg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/cuisine-bg.webp');
   }
 }
 
 body {
   background: var(--background);
-  background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 250, 240, 0.85)), url('/cuisine-bg.jpeg');
+  background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 250, 240, 0.85)), url('/cuisine-bg.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
