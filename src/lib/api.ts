@@ -1,9 +1,17 @@
+import { mockAddToFavorites, mockGetFavorites, mockGetRecipe, mockGetRecipes, mockLogin, mockRemoveFromFavorites } from './mock-api';
 import { Recipe } from './types';
 export type { Recipe } from './types';
 
 const API_BASE_URL = 'https://gourmet.cours.quimerch.com';
 
+// Bascule sur des donnees factices locales (src/lib/mock-data.ts) quand l'API
+// distante est indisponible. NEXT_PUBLIC_ car les composants clients
+// (FavoriteButton, page de login) passent aussi par ce module.
+const USE_MOCK_API = process.env.NEXT_PUBLIC_USE_MOCK_API === 'true';
+
 export async function getRecipes(): Promise<Recipe[]> {
+  if (USE_MOCK_API) return mockGetRecipes();
+
   try {
     const response = await fetch(`${API_BASE_URL}/recipes`, {
       cache: 'no-store',
@@ -24,6 +32,8 @@ export async function getRecipes(): Promise<Recipe[]> {
 }
 
 export async function getRecipe(id: string): Promise<Recipe> {
+  if (USE_MOCK_API) return mockGetRecipe(id);
+
   try {
     const response = await fetch(`${API_BASE_URL}/recipes/${id}`, {
       cache: 'no-store',
@@ -43,6 +53,8 @@ export async function getRecipe(id: string): Promise<Recipe> {
 }
 
 export async function login(username: string, password: string) {
+  if (USE_MOCK_API) return mockLogin(username, password);
+
   const headerVariations = [
     {
       'Content-Type': 'application/json',
@@ -100,6 +112,8 @@ export async function login(username: string, password: string) {
 }
 
 export async function getFavorites(token: string, username: string): Promise<Recipe[]> {
+  if (USE_MOCK_API) return mockGetFavorites(token, username);
+
   const headerVariations = [
     {
       Authorization: `Bearer ${token}`,
@@ -240,6 +254,8 @@ export async function getFavorites(token: string, username: string): Promise<Rec
 }
 
 export async function addToFavorites(recipeId: string, token: string, username: string) {
+  if (USE_MOCK_API) return mockAddToFavorites(recipeId, token, username);
+
   const headerVariations: Array<HeadersInit> = [
     {
       'Content-Type': 'application/json',
@@ -292,6 +308,8 @@ export async function addToFavorites(recipeId: string, token: string, username: 
 }
 
 export async function removeFromFavorites(recipeId: string, token: string, username: string) {
+  if (USE_MOCK_API) return mockRemoveFromFavorites(recipeId, token, username);
+
   const headerVariations = [
     {
       Authorization: `Bearer ${token}`,

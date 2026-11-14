@@ -16,6 +16,12 @@ WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+# Les variables NEXT_PUBLIC_* sont inlinees dans le bundle client au build :
+# elles doivent donc etre presentes ici, pas seulement au runtime.
+ARG NEXT_PUBLIC_USE_MOCK_API=false
+ENV NEXT_PUBLIC_USE_MOCK_API=$NEXT_PUBLIC_USE_MOCK_API
+
 RUN corepack enable pnpm && pnpm run build
 
 FROM base AS runner
